@@ -1,0 +1,81 @@
+void main() {
+  Alumno maria = Alumno();
+  maria.setNombre = "María";
+  maria.setcalificaiones = [10, 9, 8];
+  maria.obtenerPromedio();
+
+  Profesor pedro = Profesor();
+  pedro.setNombre = "Pedro";
+  pedro.setRFC = "HECL970930HCSRRS00";
+  pedro.tieneRFC();
+}
+
+class Escuela {
+  Bienvenida() {}
+}
+
+abstract class Persona implements Escuela {
+  String _nombre = "";
+  String _apellido = "";
+  int _edad = 0;
+  String _telefono = "";
+
+  get getNombre => this._nombre;
+  set setNombre(String nombre) => this._nombre = nombre;
+}
+
+class Alumno extends Persona {
+  List<double> _calificaiones = const [];
+
+  get getcalificaiones => this._calificaiones;
+  set setcalificaiones(List<double> calificaiones) =>
+      this._calificaiones = calificaiones;
+
+  obtenerPromedio() {
+    Bienvenida();
+    print("El promedio del alumno ${this._nombre} es ${_calcularPromedio()}");
+  }
+
+  _calcularPromedio() {
+    return this._calificaiones.reduce((valor, elemento) => valor + elemento) /
+        this._calificaiones.length;
+  }
+
+  @override
+  Bienvenida() {
+    print("Bienvenido Alumno ${this._nombre}");
+  }
+}
+
+// Herencia
+
+class Profesor extends Persona with Validaciones {
+  String _rfc = "";
+
+  get getRFC => this._rfc;
+  set setRFC(String rfc) => this._rfc = rfc;
+
+  tieneRFC() {
+    Bienvenida();
+    if (_rfc.isNotEmpty)
+      print("El profesor $_nombre Tiene un RFC que es $_rfc");
+    else
+      print("El profesor $_nombre No tiene RFC");
+    
+    validaRFChomo(this._rfc);
+  }
+
+  @override
+  Bienvenida() {
+    print("Bienvenido Profesor ${this._nombre}");
+  }
+  
+}
+  
+  mixin Validaciones{
+    
+    validaRFChomo(String rfc){
+      print((rfc.length>10)?"RFC con Homoclave":"RFC sin homoclave");
+    }
+  
+}
